@@ -14,4 +14,4 @@ add_executable(Nova src/main.cpp
         internal/tokens_map.h
         internal/debug.h
         internal/parser.h
-        internal/perfect_hash.h)
+)

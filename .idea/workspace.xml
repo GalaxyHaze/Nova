@@ -27,23 +27,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b87c33e-4cb7-4044-b1b5-be9815a3fb95" name="Changes" comment="Parser improvements">
-      <change afterPath="$PROJECT_DIR$/internal/perfect_hash.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/tokens_map.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_11_25,_6_51 AM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_11_25__6_51AM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_12_25,_12_40 PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_12_25__12_40PM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="2b87c33e-4cb7-4044-b1b5-be9815a3fb95" name="Changes" comment="Enchancing file.h system">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/TokenizerTurbo.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/core.h" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/debug.h" beforeDir="false" afterPath="$PROJECT_DIR$/internal/debug.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/maps.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/parser.h" beforeDir="false" afterPath="$PROJECT_DIR$/internal/parser.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/tokenizer.h" beforeDir="false" afterPath="$PROJECT_DIR$/internal/tokenizer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/perfect_hash.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/tokens.h" beforeDir="false" afterPath="$PROJECT_DIR$/internal/tokens.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/tokens_map.h" beforeDir="false" afterPath="$PROJECT_DIR$/internal/tokens_map.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,7 +147,8 @@
       <workItem from="1763389071925" duration="67000" />
       <workItem from="1763389150258" duration="5000" />
       <workItem from="1764588902240" duration="3330000" />
-      <workItem from="1764592253392" duration="50000" />
+      <workItem from="1764592253392" duration="2393000" />
+      <workItem from="1764611097529" duration="2417000" />
     </task>
     <task id="LOCAL-00001" summary="Enchancing file.h system">
       <option name="closed" value="true" />
@@ -200,7 +190,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762952511113</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Enchancing file.h system">
+      <option name="closed" value="true" />
+      <created>1764592328003</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1764592328003</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,11 +213,11 @@
     <isAutomaticReloadCMake value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Enchancing file.h system" />
     <MESSAGE value="ALOT OF IMPROVEMENTS IN TOKENIZER" />
     <MESSAGE value="Improving tokenizer, implement otimizations into the maps" />
     <MESSAGE value="Parser improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Parser improvements" />
+    <MESSAGE value="Enchancing file.h system" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enchancing file.h system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

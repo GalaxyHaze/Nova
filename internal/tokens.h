@@ -76,7 +76,7 @@ enum class TokenType : uint8_t {
 
     Unknown, // always nice to have a fallback
     Return,
-    End, If, Else, While, For, In, Arrow, PlusEqual, MinusEqual, MultiplyEqual, DivideEqual, Dot, Dots, Switch, Struct, Enum, Union, Family, Break, Continue
+    End, If, Else, While, For, In, Arrow, PlusEqual, MinusEqual, MultiplyEqual, DivideEqual, Dot, Dots, Switch, Struct, Enum, Union, Family, Break, Continue, Mod, Entity
 };
 
 // --- TokenType Structure ---
