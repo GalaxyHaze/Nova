@@ -132,7 +132,9 @@ class Tokenizer {
     // Removed tryMatchOperator — unified into main loop!
 
 public:
-    [[nodiscard]] static auto tokenize(const std::string_view src) noexcept {
+    static void placeholderErrors(const std::vector<LexError>& vector){}
+
+     [[nodiscard]] static auto tokenize(const std::string_view src) noexcept {
         std::vector<Token> tokens;
         std::vector<LexError> errors;  // Collect for user
         tokens.reserve(src.size() / 4);  // Slightly better avg (accounts for numbers/strings)
@@ -164,7 +166,7 @@ public:
 
             // Potential keyword/operator/punct: Try longest possible prefix
             // Creatively: Probe up to 3 chars (your longest is 3: ...), use lookupToken
-            const size_t maxLen = std::min<size_t>(3, end - current);  // Adjust if add longer ops
+            /*const size_t maxLen = std::min<size_t>(3, end - current);  // Adjust if add longer ops
             std::string_view candidate;
             size_t matchLen = 0;
             auto type = TokenType::Unknown;
@@ -180,7 +182,7 @@ public:
                 tokens.emplace_back(type, candidate, info);
                 consume(info, current, matchLen);
                 continue;
-            }
+            }*/
 
             // Identifier/keyword
             if (isAlpha(c) || c == '_') {
@@ -208,8 +210,9 @@ public:
 
         // Optional: Add EOF token
         tokens.emplace_back(TokenType::End, std::string_view(), info);
-
-        return std::make_pair(std::move(tokens), std::move(errors));
+        if (!errors.empty())
+            placeholderErrors(errors);
+        return tokens;
     }
 };
 

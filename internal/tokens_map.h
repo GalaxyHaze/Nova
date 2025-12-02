@@ -36,7 +36,7 @@ constexpr auto TokenTable = std::to_array<std::pair<std::string_view, TokenType>
     {"i8", TokenType::Type}, {"i16", TokenType::Type}, {"i32", TokenType::Type},
     {"i64", TokenType::Type}, {"u8", TokenType::Type}, {"u16", TokenType::Type},
     {"u32", TokenType::Type}, {"u64", TokenType::Type}, {"f32", TokenType::Type},
-    {"f64", TokenType::Type}, {"bool", TokenType::Type}, {"str", TokenType::Type},
+    {"f64", TokenType::Type}, {"bool", TokenType::Type},
     {"void", TokenType::Type},
 
     // Keywords
