@@ -137,7 +137,7 @@ public:
      [[nodiscard]] static auto tokenize(const std::string_view src) noexcept {
         std::vector<Token> tokens;
         std::vector<LexError> errors;  // Collect for user
-        tokens.reserve(src.size() / 3 + 1);  // Slightly better avg (accounts for numbers/strings)
+        tokens.reserve(src.size() / 2 + 1);  // Slightly better avg (accounts for numbers/strings)
         Info info{};
         const char* current = src.data();
         const char* end = src.data() + src.size();

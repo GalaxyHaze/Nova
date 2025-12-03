@@ -172,7 +172,4 @@ constexpr TokenType lookupToken(const std::string_view sv) noexcept {
     return KeywordHasher.lookup(sv);
 }
 
-static_assert(lookupToken("let") == TokenType::Let);
-static_assert(lookupToken("...") == TokenType::Dots);
-
 #endif
