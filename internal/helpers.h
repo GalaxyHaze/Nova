@@ -17,6 +17,10 @@ constexpr bool isAlphaNum(const char c) noexcept {
            c == '_';
 }
 
+constexpr char toLower(const char c) noexcept {
+    return (c >= 'A' && c <= 'Z') ? (c + 32) : c;
+}
+
 constexpr bool isAlpha(const char c) noexcept {
     return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';
 }

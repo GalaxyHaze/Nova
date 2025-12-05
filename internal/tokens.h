@@ -9,8 +9,9 @@
 typedef unsigned short u_short;
 
 // --- Info ---
+//it's based on 1-based indexing for lines and columns
 struct Info {
-    size_t index{0};   // 0-based column/offset
+    size_t index{1};   // 0-based column/offset
     size_t line{1};    // human-friendly line number (start at 1)
 
     // Prefix increment: ++info -> increments and returns reference
@@ -38,7 +39,7 @@ struct Info {
 
     void newLine() noexcept {
         ++line;
-        index = 0; // reset to 0 for the new line
+        index = 1;
     }
 
     void newLine(size_t n) noexcept {
