@@ -12,30 +12,30 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            name: nova-linux-amd64
+            name: mylang-linux-amd64
           - os: macos-latest
-            name: nova-macos-amd64
+            name: mylang-macos-amd64
           - os: windows-latest
-            name: nova-windows-amd64.exe
+            name: mylang-windows-amd64.exe
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Configure CMake
-      run: cmake -B build
+      - name: Configure CMake
+        run: cmake -B build
 
-    - name: Build
-      run: cmake --build build --config Release
+      - name: Build
+        run: cmake --build build --config Release
 
-    - name: Rename Binary (Unix)
-      if: runner.os != 'Windows'
-      run: mv build/mylang ${{ matrix.name }}
+      - name: Rename Binary (Unix)
+        if: runner.os != 'Windows'
+        run: mv build/mylang ${{ matrix.name }}
 
-    - name: Rename Binary (Windows)
-      if: runner.os == 'Windows'
-      run: move build\Release\mylang.exe ${{ matrix.name }}
+      - name: Rename Binary (Windows)
+        if: runner.os == 'Windows'
+        run: move build\Release\mylang.exe ${{ matrix.name }}
 
-    - name: Upload Release Asset
-      uses: softprops/action-gh-release@v1
-      with:
-        files: ${{ matrix.name }}
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ matrix.name }}
