@@ -29,13 +29,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b87c33e-4cb7-4044-b1b5-be9815a3fb95" name="Changes" comment="Perfect hasher update">
+    <list default="true" id="2b87c33e-4cb7-4044-b1b5-be9815a3fb95" name="Changes" comment="install.sh update">
+      <change beforePath="$PROJECT_DIR$/.idea/Nova.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Nova.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/file.h" beforeDir="false" afterPath="$PROJECT_DIR$/internal/file.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/tokenizer.h" beforeDir="false" afterPath="$PROJECT_DIR$/internal/tokenizer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/tokens.h" beforeDir="false" afterPath="$PROJECT_DIR$/internal/tokens.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/tokens_map.h" beforeDir="false" afterPath="$PROJECT_DIR$/internal/tokens_map.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +55,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/GalaxyHaze/Nova.git&quot;,
-    &quot;accountId&quot;: &quot;085281a7-3a8b-4f2f-a92b-59ed124a184b&quot;
+    &quot;accountId&quot;: &quot;4f49c8f5-3fc2-41e1-9110-c8a1f5e694d5&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -87,6 +84,9 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="z9iHagtc" />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -109,7 +109,9 @@
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;C:\\Users\\al24254\\AppData\\Roaming\\JetBrains\\CLion2025.3\\plugins\\Shell Script\\shellcheck.exe&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
@@ -180,6 +182,9 @@
       <workItem from="1764939856631" duration="12000" />
       <workItem from="1767700944482" duration="1118000" />
       <workItem from="1767702129421" duration="10000" />
+      <workItem from="1768393892915" duration="58000" />
+      <workItem from="1768470883398" duration="8000" />
+      <workItem from="1768558599176" duration="1315000" />
     </task>
     <task id="LOCAL-00001" summary="Enchancing file.h system">
       <option name="closed" value="true" />
@@ -293,7 +298,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764837218792</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="install.sh update">
+      <option name="closed" value="true" />
+      <created>1768559667957</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1768559667957</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,8 +327,10 @@
     <MESSAGE value="Enchancing file.h system" />
     <MESSAGE value="Enhance perfect hash keyword lookup and improve token handling" />
     <MESSAGE value="Enhance tokenizer with improved error handling and support for additional token types" />
+    <MESSAGE value="release.yml" />
     <MESSAGE value="Perfect hasher update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Perfect hasher update" />
+    <MESSAGE value="install.sh update" />
+    <option name="LAST_COMMIT_MESSAGE" value="install.sh update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

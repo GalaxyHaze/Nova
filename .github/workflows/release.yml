@@ -1,41 +1,59 @@
-name: Release Binaries
+name: Build and Release
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - 'v*' # Trigger this workflow when a tag starting with 'v' is pushed (e.g., v1.0.0)
 
 jobs:
-  build:
+  build-and-release:
     name: Build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         include:
           - os: ubuntu-latest
-            name: mylang-linux-amd64
+            target_name: nova-linux-amd64
           - os: macos-latest
-            name: mylang-macos-amd64
+            target_name: nova-macos-amd64
           - os: windows-latest
-            name: mylang-windows-amd64.exe
+            target_name: nova-windows-amd64.exe
 
     steps:
-      - uses: actions/checkout@v3
+      # 1. Checkout Code
+      - name: Checkout code
+        uses: actions/checkout@v4
 
+      # 2. Setup CMake (Not strictly needed on latest runners, but good practice)
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v2
+
+      # 3. Configure & Build
       - name: Configure CMake
-        run: cmake -B build
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
         run: cmake --build build --config Release
 
-      - name: Rename Binary (Unix)
-        if: runner.os != 'Windows'
-        run: mv build/mylang ${{ matrix.name }}
+      # 4. Rename and Prepare Artifacts
+      # CLion/CMake usually outputs the binary as the project name.
+      # We need to rename it to match your install.sh expectations.
+      - name: Prepare Artifacts
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          if [ "${{ matrix.os }}" == "windows-latest" ]; then
+            # Windows usually outputs in build/Release/
+            cp build/Release/Nova.exe artifacts/${{ matrix.target_name }}
+          else
+            # Linux/Mac usually outputs in build/
+            cp build/Nova artifacts/${{ matrix.target_name }}
+          fi
 
-      - name: Rename Binary (Windows)
-        if: runner.os == 'Windows'
-        run: move build\Release\mylang.exe ${{ matrix.name }}
-
-      - name: Upload Release Asset
+      # 5. Upload to GitHub Release
+      - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{ matrix.name }}
+          files: artifacts/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

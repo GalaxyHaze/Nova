@@ -1,16 +1,25 @@
 #!/bin/bash
 
-# 1. Determine Latest Version Tag
-REPO="GalaxyHaze/Nova"
-API_URL="https://api.github.com/repos/$REPO/releases/latest"
-
-# Get tag name from JSON response
-VERSION=$(curl -s $API_URL | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+# 1. Determine Version
+# If the user provided an argument (e.g., ./install.sh v1.0.0), use it.
+# Otherwise, fetch 'latest'.
+if [ -n "$1" ]; then
+    VERSION="$1"
+    echo "Installing requested version: $VERSION"
+else
+    REPO="GalaxyHaze/Nova"
+    API_URL="https://api.github.com/repos/$REPO/releases/latest"
+    # Get tag name from JSON response
+    VERSION=$(curl -s $API_URL | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    echo "No version specified. Installing latest version: $VERSION"
+fi
 
 if [ -z "$VERSION" ]; then
-    echo "Error: Could not fetch the latest version from GitHub."
+    echo "Error: Could not determine version."
     exit 1
 fi
+
+# ... (The rest of your script remains the same) ...
 
 echo "Installing Nova version: $VERSION"
 
