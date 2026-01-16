@@ -14,7 +14,9 @@ jobs:
         include:
           - os: ubuntu-latest
             target_name: nova-linux-amd64
-          - os: macos-latest
+          # macos-13 is the last runner specifically on Intel (x86_64/amd64).
+          # macos-latest (14+) is ARM64. If you want ARM64, use macos-latest and rename target to nova-macos-arm64.
+          - os: macos-13
             target_name: nova-macos-amd64
           - os: windows-latest
             target_name: nova-windows-amd64.exe
@@ -28,34 +30,38 @@ jobs:
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v2
 
-      # NEW: Install Ninja generator (Faster and multi-config friendly)
+      # 3. Install Ninja
       - name: Install Ninja
         uses: seanmiddleditch/gha-setup-ninja@master
 
-      # 3. Configure & Build
-      # CHANGE: Added -DCMAKE_BUILD_TYPE=Release to Windows and added Ninja generator
+      # 4. Setup MSVC Environment (Windows Only)
+      # CRITICAL: Ninja on Windows requires this to find cl.exe
+      - name: Setup MSVC Dev Cmd
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      # 5. Configure & Build
       - name: Configure CMake
         run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
         run: cmake --build build --config Release
 
-      # 4. Prepare Artifacts
-      # CHANGE: Ensures directory structure consistency and proper copying
+      # 6. Prepare Artifacts
       - name: Prepare Artifacts
         shell: bash
         run: |
           mkdir -p artifacts
           
-          # Locate the executable safely regardless of OS
           if [ "${{ runner.os }}" == "Windows" ]; then
-            # Using the fixed output folder from the ninja/multi-config setup
             cp build/Nova.exe artifacts/${{ matrix.target_name }}
           else
+            # Ensure the binary is executable
+            chmod +x build/Nova
             cp build/Nova artifacts/${{ matrix.target_name }}
           fi
 
-      # 5. Upload the binaries to the Release
+      # 7. Upload the binaries to the Release
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v1
         with:
