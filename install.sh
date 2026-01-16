@@ -1,16 +1,18 @@
 #!/bin/bash
 
-# 1. Determine Version
-# If the user provided an argument (e.g., ./install.sh v1.0.0), use it.
-# Otherwise, fetch 'latest'.
+# 1. Setup Global Variables
+REPO="GalaxyHaze/Nova"
+VERSION=""
+OUTPUT_NAME="nova"
+
+# 2. Determine Version
 if [ -n "$1" ]; then
     VERSION="$1"
     echo "Installing requested version: $VERSION"
 else
-    REPO="GalaxyHaze/Nova"
     API_URL="https://api.github.com/repos/$REPO/releases/latest"
-    # Get tag name from JSON response
-    VERSION=$(curl -s $API_URL | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    # Fetch latest tag
+    VERSION=$(curl -s "$API_URL" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
     echo "No version specified. Installing latest version: $VERSION"
 fi
 
@@ -19,11 +21,7 @@ if [ -z "$VERSION" ]; then
     exit 1
 fi
 
-# ... (The rest of your script remains the same) ...
-
-echo "Installing Nova version: $VERSION"
-
-# 2. Detect OS and Architecture
+# 3. Detect OS and Architecture
 OS="$(uname -s)"
 ARCH="$(uname -m)"
 
@@ -32,26 +30,48 @@ FILE_NAME=""
 case "$OS" in
   Linux*)  FILE_NAME="nova-linux-amd64" ;;
   Darwin*) FILE_NAME="nova-macos-amd64" ;;
-  CYGWIN*|MINGW*|MSYS*) FILE_NAME="nova-windows-amd64.exe" ;;
-  *)      echo "OS not supported"; exit 1 ;;
+  # Covers Git Bash, MinGW, and MSYS on Windows
+  MINGW*|MSYS*|CYGWIN*)
+      FILE_NAME="nova-windows-amd64.exe"
+      OUTPUT_NAME="nova.exe"
+      ;;
+  *)      echo "OS not supported: $OS"; exit 1 ;;
 esac
+
+# Safety Check if we didn't find a filename (e.g. on an unsupported ARM Mac)
+if [ -z "$FILE_NAME" ]; then
+    echo "Error: Could not find a compatible binary for $OS $ARCH."
+    exit 1
+fi
 
 DOWNLOAD_URL="https://github.com/$REPO/releases/download/$VERSION/$FILE_NAME"
 
-# 3. Download the binary
-OUTPUT_NAME="Nova"
-if [[ "$OS" == CYGWIN* ]] || [[ "$OS" == MINGW* ]] || [[ "$OS" == MSYS* ]]; then
-    OUTPUT_NAME="Nova.exe"
+echo "Downloading from $DOWNLOAD_URL..."
+
+# 4. Download the binary
+# -L follows redirects, -s is silent, -S shows error on fail, -o specifies output
+if ! curl -fsSL "$DOWNLOAD_URL" -o "$OUTPUT_NAME"; then
+    echo "Error: Failed to download binary."
+    echo "Please check the URL: $DOWNLOAD_URL"
+    exit 1
 fi
 
-echo "Downloading from $DOWNLOAD_URL..."
-curl -L -o "$OUTPUT_NAME" "$DOWNLOAD_URL"
-
-# 4. Install to /usr/local/bin (requires sudo)
-if [ "$OS" = "Darwin" ] || [ "$OS" = "Linux" ]; then
+# 5. Install
+if [[ "$OS" == MINGW* ]] || [[ "$OS" == MSYS* ]] || [[ "$OS" == CYGWIN* ]]; then
+    # Windows (Git Bash)
     chmod +x "$OUTPUT_NAME"
-    sudo mv "$OUTPUT_NAME" /usr/local/bin/Nova
-    echo "Installation complete! Run 'Nova --help' to get started."
-else
     echo "Download complete. Please move '$OUTPUT_NAME' to a folder in your PATH."
+else
+    # Linux / macOS
+    chmod +x "$OUTPUT_NAME"
+    echo "Installing Nova to /usr/local/bin/..."
+    sudo mv "$OUTPUT_NAME" /usr/local/bin/nova
+
+    # Check if it worked
+    # shellcheck disable=SC2181
+    if [ $? -eq 0 ]; then
+        echo "Installation complete! Run 'nova --help' to get started."
+    else
+        echo "Installation failed. Please check your sudo permissions."
+    fi
 fi
