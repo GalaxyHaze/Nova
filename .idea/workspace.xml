@@ -29,7 +29,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b87c33e-4cb7-4044-b1b5-be9815a3fb95" name="Changes" comment="install.sh update" />
+    <list default="true" id="2b87c33e-4cb7-4044-b1b5-be9815a3fb95" name="Changes" comment="GitHuv actions: automation release test">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -180,7 +182,7 @@
       <workItem from="1767702129421" duration="10000" />
       <workItem from="1768393892915" duration="58000" />
       <workItem from="1768470883398" duration="8000" />
-      <workItem from="1768558599176" duration="1665000" />
+      <workItem from="1768558599176" duration="2647000" />
     </task>
     <task id="LOCAL-00001" summary="Enchancing file.h system">
       <option name="closed" value="true" />
@@ -302,7 +304,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768559667957</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="experiment: v.delta release">
+      <option name="closed" value="true" />
+      <created>1768560968655</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1768560968655</updated>
+    </task>
+    <task id="LOCAL-00017" summary="GitHuv actions: automation release test">
+      <option name="closed" value="true" />
+      <created>1768561259118</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1768561259118</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,6 +334,17 @@
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ALOT OF IMPROVEMENTS IN TOKENIZER" />
     <MESSAGE value="Improving tokenizer, implement otimizations into the maps" />
@@ -326,7 +355,9 @@
     <MESSAGE value="release.yml" />
     <MESSAGE value="Perfect hasher update" />
     <MESSAGE value="install.sh update" />
-    <option name="LAST_COMMIT_MESSAGE" value="install.sh update" />
+    <MESSAGE value="experiment: v.delta release" />
+    <MESSAGE value="GitHuv actions: automation release test" />
+    <option name="LAST_COMMIT_MESSAGE" value="GitHuv actions: automation release test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
