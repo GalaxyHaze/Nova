@@ -38,7 +38,7 @@ namespace Nova {
         CoreInterfaceCommand(const CoreInterfaceCommand&) = delete;
         CoreInterfaceCommand& operator=(const CoreInterfaceCommand&) = delete;
 
-        static Options parse(int argc, const char** argv) {
+        static Options parse(const int argc, const char** argv) {
             CLI::App app{"Nova - A low-level general-purpose language"};
 
             std::string input_file;

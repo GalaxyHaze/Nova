@@ -15,7 +15,7 @@
 #include <filesystem>
 #include <vector>
 
-namespace internal::nova::file {
+namespace nova::file {
     namespace fs = std::filesystem;
 
     // ------------------------------------------------------------

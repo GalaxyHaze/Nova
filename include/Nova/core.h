@@ -11,6 +11,7 @@
 #include "parse/parser.h"
 #include "utils/debug.h"
 
-constexpr auto version = "v0.0-delta";
+
+static const auto version = nova::file::readFile("version.txt");
 
 #endif //NOVA_CORE_H

@@ -8,11 +8,13 @@
 #include "../parse/tokens.h"
 #include <vector>
 #include <iostream>
-
-inline void printTokens(const std::vector<Token>& tokens) {
-    std::cout << "Starting the print of Tokens:\n";
-    for (const auto& token : tokens) {
-        std::cout << token.value << "  ";
+namespace nova
+{
+    inline void printTokens(const std::vector<Token>& tokens) {
+        std::cout << "Starting the print of Tokens:\n";
+        for (const auto& token : tokens) {
+            std::cout << token.value << "  ";
+        }
     }
 }
 

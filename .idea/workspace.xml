@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BackendCodeEditorMiscSettings">
-    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="4" type="long" />
+    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="6" type="long" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
     <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
@@ -31,24 +31,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b87c33e-4cb7-4044-b1b5-be9815a3fb95" name="Changes" comment="Folder organization">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/Nova/interface/CLI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Nova.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Nova.xml" afterDir="false" />
+    <list default="true" id="2b87c33e-4cb7-4044-b1b5-be9815a3fb95" name="Changes" comment="Project restructuring">
+      <change afterPath="$PROJECT_DIR$/version.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/git.ignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/core.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/core.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/interface/CLI.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/parse/parser.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/parse/parser.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/parse/tokenizer.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/parse/tokenizer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/parse/tokens.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/parse/tokens.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/parse/tokens_map.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/parse/tokens_map.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/utils/debug.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/utils/debug.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/utils/file.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/utils/file.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/utils/helpers.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/utils/helpers.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/Nova/core.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/core.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/Nova/interface/CLI.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/interface/CLI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/Nova/utils/debug.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/utils/debug.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/Nova/utils/file.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/utils/file.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/Nova/utils/helpers.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/utils/helpers.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto.nova" beforeDir="false" afterPath="$PROJECT_DIR$/tests/prototype.nova" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +187,7 @@
       <workItem from="1768568017735" duration="11000" />
       <workItem from="1769416980943" duration="3665000" />
       <workItem from="1769427923699" duration="164000" />
-      <workItem from="1769429160396" duration="1034000" />
+      <workItem from="1769429160396" duration="1904000" />
     </task>
     <task id="LOCAL-00001" summary="Enchancing file.h system">
       <option name="closed" value="true" />
@@ -366,7 +357,39 @@
       <option name="project" value="LOCAL" />
       <updated>1769418170011</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Project restructuring">
+      <option name="closed" value="true" />
+      <created>1769430265755</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1769430265755</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Project restructuring">
+      <option name="closed" value="true" />
+      <created>1769430315202</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1769430315203</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Project restructuring">
+      <option name="closed" value="true" />
+      <created>1769430380674</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1769430380674</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Project restructuring">
+      <option name="closed" value="true" />
+      <created>1769430438777</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1769430438777</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -392,7 +415,8 @@
     <MESSAGE value="minimum required" />
     <MESSAGE value="permission: write" />
     <MESSAGE value="Folder organization" />
-    <option name="LAST_COMMIT_MESSAGE" value="Folder organization" />
+    <MESSAGE value="Project restructuring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project restructuring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
