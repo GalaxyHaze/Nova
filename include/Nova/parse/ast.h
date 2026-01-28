@@ -1,47 +1,37 @@
-// ast.h
-#pragma once
+// include/Nova/ast/ast.h
+#ifndef NOVA_AST_AST_H
+#define NOVA_AST_AST_H
 
-#include <cstddef>
-#include <cstdint>
-#include <span>
+#include "../utils/slice.h"
 
-// Forward-declare only what's needed in public API
-struct Token;
-struct Arena;
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-namespace nova::ast {
+    struct NovaArena;
 
-    enum class NodeType : uint8_t {
-        end = 0x0,
-        Literal,
-        BinaryExpression,
-        Identifier,
-        VariableDeclaration,
-        FunctionDeclaration,
-        IfStatement,
-        WhileStatement,
-        ReturnStatement,
-        Unknown = 0xFF,
-    };
+    typedef enum {
+        NOVA_NODE_END = 0x0,
+        NOVA_NODE_LITERAL,
+        NOVA_NODE_BINARY_EXPRESSION,
+        NOVA_NODE_IDENTIFIER,
+        NOVA_NODE_VARIABLE_DECLARATION,
+        NOVA_NODE_FUNCTION_DECLARATION,
+        NOVA_NODE_IF_STATEMENT,
+        NOVA_NODE_WHILE_STATEMENT,
+        NOVA_NODE_RETURN_STATEMENT,
+        NOVA_NODE_UNKNOWN = 0xFF
+    } NovaNodeType;
 
-    // Opaque handle – clients never see internals
-    struct ASTNode;
-    using Node = ASTNode*;
-    struct ValidationContext;
-    struct CodeGenContext;
-    struct OutputStream;
+    typedef struct ASTNode ASTNode;
+    typedef ASTNode* NovaNode;
 
-    // Public interface functions
-    Node parse(std::span<Token> tokens, size_t token_count, Arena& arena);
-    NodeType getNodeType(Node node);
+    // Public functions
+    NovaNode nova_parse(NovaTokenSlice tokens, struct NovaArena* arena);
+    NovaNodeType nova_node_get_type(NovaNode node);
 
-    struct NodeVTable {
-        void (*print)(const ASTNode*, OutputStream*, size_t depth);
-        bool (*validate)(const ASTNode*, ValidationContext*);
-        void (*codegen)(const ASTNode*, CodeGenContext*);
-    };
+#ifdef __cplusplus
+}
+#endif
 
-    inline NodeVTable dispatchNode[256] = {};
-
-
-} // namespace nova::ast
+#endif // NOVA_AST_AST_H

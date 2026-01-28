@@ -1,3 +1,4 @@
+// include/Nova/parse/keywords.h
 #pragma once
 #ifndef NOVA_KEYWORDS_H
 #define NOVA_KEYWORDS_H
@@ -5,10 +6,10 @@
 #include <array>
 #include <string_view>
 #include <cstdint>
-#include "tokens.h"
+#include "tokens.h" // must define NovaTokenType and enum constants
 
 // ------------------------------------------------------------
-// Hash Functions
+// Hash Functions (unchanged)
 // ------------------------------------------------------------
 constexpr uint64_t mix64(uint64_t x) {
     x ^= x >> 33;
@@ -29,96 +30,97 @@ constexpr uint64_t hash64(const std::string_view sv) {
 }
 
 // ------------------------------------------------------------
-// Keyword Table
+// Keyword Table — updated to use NOVA_TOKEN_* constants
 // ------------------------------------------------------------
-constexpr auto TokenTable = std::to_array<std::pair<std::string_view, TokenType>>({
-    {"i8", TokenType::Type}, {"i16", TokenType::Type}, {"i32", TokenType::Type},
-    {"i64", TokenType::Type}, {"u8", TokenType::Type}, {"u16", TokenType::Type},
-    {"u32", TokenType::Type}, {"u64", TokenType::Type}, {"f32", TokenType::Type},
-    {"f64", TokenType::Type}, {"bool", TokenType::Type},
-    {"void", TokenType::Type},
+constexpr auto TokenTable = std::to_array<std::pair<std::string_view, NovaTokenType>>({
+    // Types
+    {"i8",      NOVA_TOKEN_TYPE}, {"i16",     NOVA_TOKEN_TYPE}, {"i32",     NOVA_TOKEN_TYPE},
+    {"i64",     NOVA_TOKEN_TYPE}, {"u8",      NOVA_TOKEN_TYPE}, {"u16",     NOVA_TOKEN_TYPE},
+    {"u32",     NOVA_TOKEN_TYPE}, {"u64",     NOVA_TOKEN_TYPE}, {"f32",     NOVA_TOKEN_TYPE},
+    {"f64",     NOVA_TOKEN_TYPE}, {"bool",    NOVA_TOKEN_TYPE}, {"void",    NOVA_TOKEN_TYPE},
 
-    {"let", TokenType::Let}, {"mutable", TokenType::Mutable}, {"return", TokenType::Return},
-    {"if", TokenType::If},{"else", TokenType::Else}, {"while", TokenType::While},
-    {"for", TokenType::For}, {"in", TokenType::In}, {"break", TokenType::Break},
-    {"continue", TokenType::Continue}, {"switch", TokenType::Switch},
-    {"struct", TokenType::Struct}, {"enum", TokenType::Enum}, {"union", TokenType::Union},
-    {"family", TokenType::Family}, {"entity", TokenType::Entity},
+    // Declarations & control flow
+    {"let",     NOVA_TOKEN_LET},       {"mutable", NOVA_TOKEN_MUTABLE},
+    {"return",  NOVA_TOKEN_RETURN},    {"if",      NOVA_TOKEN_IF},
+    {"else",    NOVA_TOKEN_ELSE},      {"while",   NOVA_TOKEN_WHILE},
+    {"for",     NOVA_TOKEN_FOR},       {"in",      NOVA_TOKEN_IN},
+    {"break",   NOVA_TOKEN_BREAK},     {"continue", NOVA_TOKEN_CONTINUE},
+    {"switch",  NOVA_TOKEN_SWITCH},    {"struct",  NOVA_TOKEN_STRUCT},
+    {"enum",    NOVA_TOKEN_ENUM},      {"union",   NOVA_TOKEN_UNION},
+    {"family",  NOVA_TOKEN_FAMILY},    {"entity",  NOVA_TOKEN_ENTITY},
 
-    {"public", TokenType::Modifier}, {"private", TokenType::Modifier},
-    {"protected", TokenType::Modifier},
+    // Modifiers
+    {"public",    NOVA_TOKEN_MODIFIER},
+    {"private",   NOVA_TOKEN_MODIFIER},
+    {"protected", NOVA_TOKEN_MODIFIER},
 
-    {"&&", TokenType::And}, {"||", TokenType::Or},
-    {"==", TokenType::Equal}, {"!=", TokenType::NotEqual},
-    {">=", TokenType::GreaterThanOrEqual}, {"<=", TokenType::LessThanOrEqual},
-    {"->", TokenType::Arrow},
-    {"+=", TokenType::PlusEqual}, {"-=", TokenType::MinusEqual},
-    {"*=", TokenType::MultiplyEqual}, {"/=", TokenType::DivideEqual},
-    {"+", TokenType::Plus}, {"-", TokenType::Minus},
-    {"*", TokenType::Multiply}, {"/", TokenType::Divide},
-    {"=", TokenType::Assignment}, {">", TokenType::GreaterThan},
-    {"<", TokenType::LessThan}, {"!", TokenType::Not},
-    {"%", TokenType::Mod},
+    // Operators
+    {"&&", NOVA_TOKEN_AND}, {"||", NOVA_TOKEN_OR},
+    {"==", NOVA_TOKEN_EQUAL}, {"!=", NOVA_TOKEN_NOT_EQUAL},
+    {">=", NOVA_TOKEN_GREATER_THAN_OR_EQUAL}, {"<=", NOVA_TOKEN_LESS_THAN_OR_EQUAL},
+    {"->", NOVA_TOKEN_ARROW},
+    {"+=", NOVA_TOKEN_PLUS_EQUAL}, {"-=", NOVA_TOKEN_MINUS_EQUAL},
+    {"*=", NOVA_TOKEN_MULTIPLY_EQUAL}, {"/=", NOVA_TOKEN_DIVIDE_EQUAL},
+    {"+", NOVA_TOKEN_PLUS}, {"-", NOVA_TOKEN_MINUS},
+    {"*", NOVA_TOKEN_MULTIPLY}, {"/", NOVA_TOKEN_DIVIDE},
+    {"=", NOVA_TOKEN_ASSIGNMENT}, {">", NOVA_TOKEN_GREATER_THAN},
+    {"<", NOVA_TOKEN_LESS_THAN}, {"!", NOVA_TOKEN_NOT},
+    {"%", NOVA_TOKEN_MOD},
 
-    {"(", TokenType::LParen}, {")", TokenType::RParen},
-    {"{", TokenType::LBrace}, {"}", TokenType::RBrace},
-    {"[", TokenType::LBracket}, {"]", TokenType::RBracket},
-    {",", TokenType::Comma}, {";", TokenType::Semicolon},
-    {":", TokenType::Colon}, {".", TokenType::Dot}, {"...", TokenType::Dots}
+    // Delimiters
+    {"(", NOVA_TOKEN_LPAREN}, {")", NOVA_TOKEN_RPAREN},
+    {"{", NOVA_TOKEN_LBRACE}, {"}", NOVA_TOKEN_RBRACE},
+    {"[", NOVA_TOKEN_LBRACKET}, {"]", NOVA_TOKEN_RBRACKET},
+    {",", NOVA_TOKEN_COMMA}, {";", NOVA_TOKEN_SEMICOLON},
+    {":", NOVA_TOKEN_COLON}, {".", NOVA_TOKEN_DOT}, {"...", NOVA_TOKEN_DOTS}
 });
 
 constexpr size_t N = TokenTable.size();
 
 // ------------------------------------------------------------
-// Perfect Hash using 2-level bucket seeds (CHD-like)
+// Perfect Hash (unchanged logic, only type name adjusted)
 // ------------------------------------------------------------
-constexpr size_t BucketCount = 64; // good for ~50–200 keywords
-constexpr size_t TableSize = 128; // must be >= N
+constexpr size_t BucketCount = 64;
+constexpr size_t TableSize = 128;
 
 struct PerfectKeywordHash {
     std::array<int16_t, TableSize> table{};
-    std::array<uint8_t, BucketCount> bucketSeed{}; // seed per bucket
+    std::array<uint8_t, BucketCount> bucketSeed{};
 
     constexpr PerfectKeywordHash() {
         table.fill(-1);
         bucketSeed.fill(0);
 
-        // 1. Build buckets
-        std::array<uint8_t, N> bucket{};
+        // 1. Assign buckets
+        std::array<size_t, N> bucket{};
         for (size_t i = 0; i < N; ++i)
             bucket[i] = hash64(TokenTable[i].first) % BucketCount;
 
-        // 2. Group indices by bucket
+        // 2. Group by bucket
         std::array<size_t, BucketCount> counts{};
-        counts.fill(0);
-
         std::array<std::array<uint16_t, 8>, BucketCount> bucketItems{};
         for (size_t i = 0; i < N; ++i) {
             size_t b = bucket[i];
             bucketItems[b][counts[b]++] = static_cast<uint16_t>(i);
         }
 
-        // 3. For each bucket: find a seed that avoids collisions
+        // 3. Resolve collisions with per-bucket seeds
         for (size_t b = 0; b < BucketCount; ++b) {
             if (counts[b] <= 1) {
-                // trivial case
                 if (counts[b] == 1) {
-                    const size_t i = bucketItems[b][0];
-                    const size_t idx = hash64(TokenTable[i].first) % TableSize;
+                    size_t i = bucketItems[b][0];
+                    size_t idx = hash64(TokenTable[i].first) % TableSize;
                     table[idx] = static_cast<int16_t>(i);
                 }
                 continue;
             }
 
-            // try seeds 0..255
             for (uint8_t seed = 0; seed < 255; ++seed) {
                 bool collision = false;
-                // temp storage for indices
                 std::array<int, 8> used{};
                 for (size_t k = 0; k < counts[b]; ++k) {
-                    const size_t i = bucketItems[b][k];
-                    const size_t idx = mix64(hash64(TokenTable[i].first) ^ seed) % TableSize;
-
+                    size_t i = bucketItems[b][k];
+                    size_t idx = mix64(hash64(TokenTable[i].first) ^ seed) % TableSize;
                     if (table[idx] != -1) {
                         collision = true;
                         break;
@@ -126,7 +128,6 @@ struct PerfectKeywordHash {
                     used[k] = static_cast<int>(idx);
                 }
                 if (!collision) {
-                    // commit
                     bucketSeed[b] = seed;
                     for (size_t k = 0; k < counts[b]; ++k) {
                         table[used[k]] = static_cast<int16_t>(bucketItems[b][k]);
@@ -137,27 +138,25 @@ struct PerfectKeywordHash {
         }
     }
 
-    [[nodiscard]] constexpr TokenType lookup(const std::string_view sv) const noexcept {
-        if (sv.empty()) return TokenType::Identifier;
+    [[nodiscard]] constexpr NovaTokenType lookup(const std::string_view sv) const noexcept {
+        if (sv.empty()) return NOVA_TOKEN_IDENTIFIER;
 
-        const uint64_t h = hash64(sv);
-        const size_t b = h % BucketCount;
-        const uint8_t seed = bucketSeed[b];
+        uint64_t h = hash64(sv);
+        size_t b = h % BucketCount;
+        uint8_t seed = bucketSeed[b];
 
-        const size_t idx =
-            (countsForBucket(b) <= 1)
-              ? (h % TableSize)
-              : (mix64(h ^ seed) % TableSize);
+        size_t idx = (countsForBucket(b) <= 1)
+            ? (h % TableSize)
+            : (mix64(h ^ seed) % TableSize);
 
-        const int16_t id = table[idx];
-        if (id == -1) return TokenType::Identifier;
+        int16_t id = table[idx];
+        if (id == -1) return NOVA_TOKEN_IDENTIFIER;
         return (TokenTable[id].first == sv)
-             ? TokenTable[id].second
-             : TokenType::Identifier;
+            ? TokenTable[id].second
+            : NOVA_TOKEN_IDENTIFIER;
     }
 
-    // tiny helper to detect whether a bucket is multi-key
-    static constexpr size_t countsForBucket(const size_t b) {
+    static constexpr size_t countsForBucket(size_t b) {
         size_t c = 0;
         for (size_t i = 0; i < N; ++i)
             if ((hash64(TokenTable[i].first) % BucketCount) == b)
@@ -168,9 +167,8 @@ struct PerfectKeywordHash {
 
 inline constexpr PerfectKeywordHash KeywordHasher{};
 
-constexpr TokenType lookupToken(const std::string_view sv) noexcept {
+constexpr NovaTokenType lookupToken(const std::string_view sv) noexcept {
     return KeywordHasher.lookup(sv);
 }
 
-
-#endif
+#endif // NOVA_KEYWORDS_H

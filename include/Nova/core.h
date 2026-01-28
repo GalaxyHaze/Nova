@@ -8,7 +8,7 @@
 #include "utils/i_o_utils.h"
 #include "parse/tokens.h"
 #include "parse/tokenizer.h"
-#include "parse/parser.h"
+#include "parse/ast.h"
 #include "utils/debug.h"
 
 

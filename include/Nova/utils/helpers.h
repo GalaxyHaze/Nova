@@ -4,6 +4,8 @@
 
 #ifndef NOVA_HELPERS_H
 #define NOVA_HELPERS_H
+#include <cstdint>
+#include "../parse/tokens.h"
 
 namespace nova::helpers
 {
@@ -35,7 +37,7 @@ namespace nova::helpers
         return c == ' ' || c == '\t' || c == '\n' || c == '\r';
     }
 
-    inline void lexError(const Info& info, const std::string_view msg) {
+    inline void lexError(const NovaInfo& info, const std::string_view msg) {
         fprintf(stderr, "Error (line %lu): %.*s\n",
                 info.line, static_cast<int>(msg.size()), msg.data());
         std::abort();

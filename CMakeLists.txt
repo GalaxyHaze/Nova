@@ -40,6 +40,11 @@ add_executable(Nova
         include/Nova/utils/i_o_utils.h
         impl/interface/CLI.cpp
         impl/parser/ast.cpp
+        include/Nova/utils/slice.h
+        include/Nova/utils/vector.h
+        impl/utils/vector.c
+        include/Nova/utils/list.h
+        impl/parser/tokenizer.cpp
 )
 
 
