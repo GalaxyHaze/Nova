@@ -30,16 +30,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="937c7cd9-f519-449d-aec2-d8c7e63547e5" name="Changes" comment="More ABI corrections">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/release.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/release.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="937c7cd9-f519-449d-aec2-d8c7e63547e5" name="Changes" comment="FetchUpdate">
+      <change afterPath="$PROJECT_DIR$/Nova.cmake.in" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Type rules.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/Nova/core.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/core.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/Nova/interface/CLI.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Nova/interface/CLI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/prototype.nova" beforeDir="false" afterPath="$PROJECT_DIR$/example/prototype.nova" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +58,9 @@
     &quot;assignee&quot;: &quot;GalaxyHaze&quot;
   }
 }</component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="37378ecd-26b5-45b4-b841-6aa474955bf4" />
+  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;git@github.com:GalaxyHaze/Nova.git&quot;,
@@ -102,6 +99,7 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
@@ -116,16 +114,21 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RunManager">
-    <configuration name="Nova" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="tests/prototype.nova" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="Nova" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="Nova">
+    <configuration name="Nova" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="tests/prototype.nova" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Nova" TARGET_NAME="Nova" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Nova" RUN_TARGET_NAME="Nova">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+    <option name="sshConnectionType" value="PASSWORD" />
+    <option name="sshUserName" value="diogo" />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -146,7 +149,11 @@
       <workItem from="1769862057221" duration="227000" />
       <workItem from="1769948754254" duration="714000" />
       <workItem from="1770037759277" duration="20000" />
-      <workItem from="1770301340625" duration="376000" />
+      <workItem from="1770301340625" duration="1408000" />
+      <workItem from="1770302759381" duration="51000" />
+      <workItem from="1770303886788" duration="783000" />
+      <workItem from="1770304678836" duration="741000" />
+      <workItem from="1770305632331" duration="16000" />
     </task>
     <task id="LOCAL-00001" summary="ABI design update">
       <option name="closed" value="true" />
@@ -164,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769831496360</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="FetchUpdate">
+      <option name="closed" value="true" />
+      <created>1770302036237</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1770302036237</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,6 +192,17 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="MARK_IGNORED_AS_EXCLUDED" value="true" />
@@ -200,7 +226,8 @@
     <MESSAGE value="C ABI compabillity FINALLY is working" />
     <MESSAGE value="ABI design update" />
     <MESSAGE value="More ABI corrections" />
-    <option name="LAST_COMMIT_MESSAGE" value="More ABI corrections" />
+    <MESSAGE value="FetchUpdate" />
+    <option name="LAST_COMMIT_MESSAGE" value="FetchUpdate" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
