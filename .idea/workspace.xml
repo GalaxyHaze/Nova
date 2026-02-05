@@ -32,6 +32,8 @@
   <component name="ChangeListManager">
     <list default="true" id="937c7cd9-f519-449d-aec2-d8c7e63547e5" name="Changes" comment="FetchUpdate">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NovaConfig.cmake.in" beforeDir="false" afterPath="$PROJECT_DIR$/NovaConfig.cmake.in" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +154,8 @@
       <workItem from="1770303886788" duration="783000" />
       <workItem from="1770304678836" duration="741000" />
       <workItem from="1770305632331" duration="103000" />
+      <workItem from="1770305760009" duration="30000" />
+      <workItem from="1770305873763" duration="128000" />
     </task>
     <task id="LOCAL-00001" summary="ABI design update">
       <option name="closed" value="true" />
@@ -185,13 +189,22 @@
       <option name="project" value="LOCAL" />
       <updated>1770305702002</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="FetchUpdate">
+      <option name="closed" value="true" />
+      <created>1770305775984</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1770305775984</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.in" />
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.nt" />
   </component>
   <component name="VCPKGProject">

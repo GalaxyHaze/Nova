@@ -1,14 +1,4 @@
-# NovaConfig.cmake.in
-
 @PACKAGE_INIT@
 
-# Check required CMake version (optional but good practice)
-if(NOT CMAKE_VERSION VERSION_GREATER_EQUAL 3.14)
-  message(FATAL_ERROR "Nova requires CMake >= 3.14")
-endif()
-
-# Include the targets file
 include("${CMAKE_CURRENT_LIST_DIR}/NovaTargets.cmake")
-
-# Optional: verify include dir exists (helps catch install issues)
 check_required_components(Nova)
