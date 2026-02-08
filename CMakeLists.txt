@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.14)
 project(Nova VERSION 0.1.0 LANGUAGES CXX)
 
 # Create interface (header-only) library
-add_library(Nova INTERFACE)
+add_library(Nova INTERFACE
+        include/Nova/nova.h)
 add_library(Nova::Nova ALIAS Nova)
 
 target_include_directories(Nova
