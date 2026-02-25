@@ -70,7 +70,7 @@ $env:KALIDOUS_VERSION="v.alpha-0.3"; irm https://raw.githubusercontent.com/Galax
 ## Documentation
 
 Full documentation is available at:
-https://bit.ly/kalidous-docs
+https://galaxyhaze.github.io/Kalidous-Lang/kalidous-docs.html
 
 ## Contributing
 
