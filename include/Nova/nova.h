@@ -14,19 +14,16 @@ extern "C" {
 // Core Types & Utilities
 // ============================================================================
 
-// Source location information
 typedef struct {
-    size_t index;  // 0-based column/offset in current line
-    size_t line;   // 1-based line number
+    size_t index;
+    size_t line;
 } NovaSourceLoc;
 
-// Generic slice (view into contiguous memory)
 typedef struct {
     const void* data;
     size_t len;
 } NovaSlice;
 
-// String slice (non-null-terminated)
 typedef struct {
     const char* data;
     size_t len;
@@ -36,167 +33,220 @@ typedef struct {
 // Token System
 // ============================================================================
 
-    typedef enum {
-        NOVA_TOKEN_STRING,
-        NOVA_TOKEN_NUMBER,
-        NOVA_TOKEN_TYPE,
-        NOVA_TOKEN_IDENTIFIER,
-        NOVA_TOKEN_MODIFIER,
+typedef enum {
+    // ------------------------------------------------------------------------
+    // Literais e identificadores
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_STRING,
+    NOVA_TOKEN_NUMBER,
+    NOVA_TOKEN_HEXADECIMAL,
+    NOVA_TOKEN_OCTAL,
+    NOVA_TOKEN_BINARY,
+    NOVA_TOKEN_FLOAT,
+    NOVA_TOKEN_IDENTIFIER,
 
-        NOVA_TOKEN_ASSIGNMENT,
-        NOVA_TOKEN_EQUAL,
-        NOVA_TOKEN_NOT_EQUAL,
-        NOVA_TOKEN_PLUS,
-        NOVA_TOKEN_MINUS,
-        NOVA_TOKEN_MULTIPLY,
-        NOVA_TOKEN_DIVIDE,
+    // ------------------------------------------------------------------------
+    // Operadores aritméticos e lógicos
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_PLUS,
+    NOVA_TOKEN_MINUS,
+    NOVA_TOKEN_MULTIPLY,
+    NOVA_TOKEN_DIVIDE,
+    NOVA_TOKEN_MOD,
 
-        NOVA_TOKEN_CONST,
-        NOVA_TOKEN_LET,
-        NOVA_TOKEN_AUTO,
-        NOVA_TOKEN_MUTABLE,
+    NOVA_TOKEN_AND,
+    NOVA_TOKEN_OR,
+    NOVA_TOKEN_NOT,
 
-        NOVA_TOKEN_GREATER_THAN,
-        NOVA_TOKEN_LESS_THAN,
-        NOVA_TOKEN_GREATER_THAN_OR_EQUAL,
-        NOVA_TOKEN_LESS_THAN_OR_EQUAL,
+    // ------------------------------------------------------------------------
+    // Operadores de comparação
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_EQUAL,
+    NOVA_TOKEN_NOT_EQUAL,
+    NOVA_TOKEN_LESS_THAN,
+    NOVA_TOKEN_GREATER_THAN,
+    NOVA_TOKEN_LESS_THAN_OR_EQUAL,
+    NOVA_TOKEN_GREATER_THAN_OR_EQUAL,
 
-        NOVA_TOKEN_AND,
-        NOVA_TOKEN_OR,
+    // ------------------------------------------------------------------------
+    // Operadores de atribuição
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_ASSIGNMENT,
+    NOVA_TOKEN_DECLARATION,     // :=
+    NOVA_TOKEN_PLUS_EQUAL,
+    NOVA_TOKEN_MINUS_EQUAL,
+    NOVA_TOKEN_MULTIPLY_EQUAL,
+    NOVA_TOKEN_DIVIDE_EQUAL,
 
-        NOVA_TOKEN_LPAREN,
-        NOVA_TOKEN_RPAREN,
-        NOVA_TOKEN_LBRACE,
-        NOVA_TOKEN_RBRACE,
-        NOVA_TOKEN_LBRACKET,
-        NOVA_TOKEN_RBRACKET,
+    // ------------------------------------------------------------------------
+    // Operadores especiais
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_QUESTION,        // ?  optional
+    NOVA_TOKEN_BANG,            // !  type may fail
+    NOVA_TOKEN_ARROW,           // -> encadeamento de funções
 
-        NOVA_TOKEN_COMMA,
-        NOVA_TOKEN_COLON,
-        NOVA_TOKEN_SEMICOLON,
+    // ------------------------------------------------------------------------
+    // Delimitadores
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_LPAREN,
+    NOVA_TOKEN_RPAREN,
+    NOVA_TOKEN_LBRACE,
+    NOVA_TOKEN_RBRACE,
+    NOVA_TOKEN_LBRACKET,
+    NOVA_TOKEN_RBRACKET,
+    NOVA_TOKEN_DOT,
+    NOVA_TOKEN_DOTS,            // ...
+    NOVA_TOKEN_COMMA,
+    NOVA_TOKEN_COLON,
+    NOVA_TOKEN_SEMICOLON,
 
-        NOVA_TOKEN_UNKNOWN,
+    // ------------------------------------------------------------------------
+    // Keywords: controle de fluxo
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_IF,
+    NOVA_TOKEN_ELSE,
+    NOVA_TOKEN_FOR,
+    NOVA_TOKEN_IN,
+    NOVA_TOKEN_WHILE,           // reservado na ABI, não usado como keyword ativa
+    NOVA_TOKEN_SWITCH,
+    NOVA_TOKEN_RETURN,
+    NOVA_TOKEN_BREAK,
+    NOVA_TOKEN_CONTINUE,
+    NOVA_TOKEN_GOTO,
+    NOVA_TOKEN_MARKER,
+    NOVA_TOKEN_SCENE,
 
-        NOVA_TOKEN_RETURN,
-        NOVA_TOKEN_END,
-        NOVA_TOKEN_IF,
-        NOVA_TOKEN_ELSE,
-        NOVA_TOKEN_WHILE,
-        NOVA_TOKEN_FOR,
-        NOVA_TOKEN_IN,
-        NOVA_TOKEN_ARROW,
-        NOVA_TOKEN_PLUS_EQUAL,
-        NOVA_TOKEN_MINUS_EQUAL,
-        NOVA_TOKEN_MULTIPLY_EQUAL,
-        NOVA_TOKEN_DIVIDE_EQUAL,
-        NOVA_TOKEN_DOT,
-        NOVA_TOKEN_DOTS,
-        NOVA_TOKEN_SWITCH,
-        NOVA_TOKEN_STRUCT,
-        NOVA_TOKEN_ENUM,
-        NOVA_TOKEN_UNION,
-        NOVA_TOKEN_FAMILY,
-        NOVA_TOKEN_BREAK,
-        NOVA_TOKEN_CONTINUE,
-        NOVA_TOKEN_MOD,
-        NOVA_TOKEN_ENTITY,
-        NOVA_TOKEN_FLOAT,
-        NOVA_TOKEN_NOT,
-        NOVA_TOKEN_HEXADECIMAL,
-        NOVA_TOKEN_OCTONAL,
-        NOVA_TOKEN_BINARY
-    } NovaTokenType;
+    // ------------------------------------------------------------------------
+    // Keywords: concorrência / fluxo assíncrono
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_SPAWN,
+    NOVA_TOKEN_JOINED,
+    NOVA_TOKEN_AWAIT,
 
-// Token with source location
+    // ------------------------------------------------------------------------
+    // Keywords: tratamento de erros
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_TRY,
+    NOVA_TOKEN_CATCH,
+    NOVA_TOKEN_MUST,            // "must!" — o ! é semântico, o Parser resolve
+
+    // ------------------------------------------------------------------------
+    // Modificadores de propriedade e escopo
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_CONST,
+    NOVA_TOKEN_MUTABLE,         // keyword: 'mut'
+    NOVA_TOKEN_VAR,
+    NOVA_TOKEN_LET,
+    NOVA_TOKEN_AUTO,
+
+    NOVA_TOKEN_GLOBAL,
+    NOVA_TOKEN_PERSISTENT,
+    NOVA_TOKEN_LOCAL,
+    NOVA_TOKEN_LEND,
+    NOVA_TOKEN_SHARED,
+    NOVA_TOKEN_VIEW,
+    NOVA_TOKEN_UNIQUE,
+    NOVA_TOKEN_PACK,            // reservado na ABI; [] é resolvido pelo Parser
+
+    // ------------------------------------------------------------------------
+    // Modificadores de acesso
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_MODIFIER,        // public / private / protected
+
+    // ------------------------------------------------------------------------
+    // Declarações de tipo
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_TYPE,
+    NOVA_TOKEN_STRUCT,
+    NOVA_TOKEN_COMPONENT,
+    NOVA_TOKEN_ENUM,
+    NOVA_TOKEN_UNION,
+    NOVA_TOKEN_FAMILY,
+    NOVA_TOKEN_ENTITY,
+    NOVA_TOKEN_TRAIT,
+    NOVA_TOKEN_TYPEDEF,
+    NOVA_TOKEN_IMPLEMENT,
+
+    // ------------------------------------------------------------------------
+    // Tokens especiais / controle
+    // ------------------------------------------------------------------------
+    NOVA_TOKEN_END,
+    NOVA_TOKEN_UNKNOWN
+} NovaTokenType;
+
 typedef struct {
-    NovaStr lexeme;        // Points into source buffer
+    NovaStr lexeme;
     NovaSourceLoc loc;
     NovaTokenType type;
-    uint16_t keyword_id;   // For NOVA_TOKEN_KEYWORD: 0=if, 1=else, etc.
+    uint16_t keyword_id;
 } NovaToken;
 
-// Token stream slice
 typedef struct {
     const NovaToken* data;
     size_t len;
 } NovaTokenStream;
 
-// Opaque arena handle
 typedef struct NovaArena NovaArena;
 
-// Tokenize source (allocates tokens in arena)
 NovaTokenStream nova_tokenize(NovaArena* arena, const char* source, size_t source_len);
 
 // ============================================================================
-// AST System (Generic & Extensible)
+// AST System
 // ============================================================================
 
-// Generic node type identifier - allows unlimited extensibility
 typedef uint16_t NovaNodeId;
 
-// Core node types (minimal set that covers 95% of languages)
 enum {
-    NOVA_NODE_ERROR = 0,        // Invalid/errored node
+    NOVA_NODE_ERROR = 0,
 
-    // Expressions
-    NOVA_NODE_LITERAL = 100,    // Number, string, boolean, null
+    NOVA_NODE_LITERAL    = 100,
     NOVA_NODE_IDENTIFIER = 101,
-    NOVA_NODE_BINARY_OP = 102,  // +, -, *, /, ==, etc.
-    NOVA_NODE_UNARY_OP = 103,   // !, -, ++, --
-    NOVA_NODE_CALL = 104,       // function(args)
-    NOVA_NODE_INDEX = 105,      // array[index]
-    NOVA_NODE_MEMBER = 106,     // obj.field
+    NOVA_NODE_BINARY_OP  = 102,
+    NOVA_NODE_UNARY_OP   = 103,
+    NOVA_NODE_CALL       = 104,
+    NOVA_NODE_INDEX      = 105,
+    NOVA_NODE_MEMBER     = 106,
 
-    // Declarations
-    NOVA_NODE_VAR_DECL = 200,   // let/const/var x = expr
-    NOVA_NODE_FUNC_DECL = 201,  // fn name(params) -> ret { body }
-    NOVA_NODE_PARAM = 202,      // function parameter
+    NOVA_NODE_VAR_DECL   = 200,
+    NOVA_NODE_FUNC_DECL  = 201,
+    NOVA_NODE_PARAM      = 202,
 
-    // Statements
-    NOVA_NODE_BLOCK = 300,      // { stmts... }
-    NOVA_NODE_IF = 301,         // if cond { then } else { alt }
-    NOVA_NODE_WHILE = 302,      // while cond { body }
-    NOVA_NODE_RETURN = 303,     // return expr;
-    NOVA_NODE_EXPR_STMT = 304,  // expr; (expression as statement)
+    NOVA_NODE_BLOCK      = 300,
+    NOVA_NODE_IF         = 301,
+    NOVA_NODE_FOR        = 302,  // unifica for e while
+    NOVA_NODE_RETURN     = 303,
+    NOVA_NODE_EXPR_STMT  = 304,
 
-    // Types (optional - for typed variants)
-    NOVA_NODE_TYPE_REF = 400,   // Type name reference
-    NOVA_NODE_TYPE_FUNC = 401,  // (A, B) -> C
+    NOVA_NODE_TYPE_REF   = 400,
+    NOVA_NODE_TYPE_FUNC  = 401,
 
-    // Custom/extensible nodes start at 1000+
     NOVA_NODE_CUSTOM_START = 1000
 };
 
-// Generic AST node (tagged union pattern)
 typedef struct NovaNode NovaNode;
 struct NovaNode {
-    NovaNodeId type;      // Node type identifier
-    NovaSourceLoc loc;    // Source location of this node
+    NovaNodeId type;
+    NovaSourceLoc loc;
 
-    // Generic child storage (interpretation depends on node type)
     union {
-        struct { NovaNode* a; NovaNode* b; NovaNode* c; } kids;  // Up to 3 children
-        struct { void* ptr; size_t len; } list;                  // Child list
-        struct { const char* str; size_t len; } ident;           // Identifier/text
-        struct { double num; } number;                           // Numeric literal
-        struct { bool value; } boolean;                          // Boolean literal
-        uint64_t custom;  // Custom payload for extension nodes
+        struct { NovaNode* a; NovaNode* b; NovaNode* c; } kids;
+        struct { void* ptr; size_t len; } list;
+        struct { const char* str; size_t len; } ident;
+        struct { double num; } number;
+        struct { bool value; } boolean;
+        uint64_t custom;
     } data;
 };
 
-// Parse token stream into AST (allocates nodes in arena)
 NovaNode* nova_parse(NovaArena* arena, NovaTokenStream tokens);
 
-// Get node type safely
 static inline NovaNodeId nova_node_type(const NovaNode* node) {
     return node ? node->type : NOVA_NODE_ERROR;
 }
 
 // ============================================================================
-// Memory Arena (Bump Allocator)
+// Memory Arena
 // ============================================================================
-
-
 
 NovaArena* nova_arena_create(size_t initial_block_size);
 void*      nova_arena_alloc(NovaArena* arena, size_t size);
@@ -205,19 +255,17 @@ void       nova_arena_reset(NovaArena* arena);
 void       nova_arena_destroy(NovaArena* arena);
 
 // ============================================================================
-// File Utilities (C-compatible)
+// File Utilities
 // ============================================================================
 
-bool  nova_file_exists(const char* path);
-bool  nova_file_is_regular(const char* path);
+bool   nova_file_exists(const char* path);
+bool   nova_file_is_regular(const char* path);
 size_t nova_file_size(const char* path);
-bool  nova_file_has_extension(const char* path, const char* ext); // case-insensitive
+bool   nova_file_has_extension(const char* path, const char* ext);
+char*  nova_load_file_to_arena(NovaArena* arena, const char* path, size_t* out_size);
 
-// Load entire file into arena (returns NULL on error, sets *out_size)
-char* nova_load_file_to_arena(NovaArena* arena, const char* path, size_t* out_size);
-
-int nova_run(const int argc, const char** argv);
-NovaTokenType nova_lookup_keyword(const char* src, const size_t len);
+int           nova_run(int argc, const char** argv);
+NovaTokenType nova_lookup_keyword(const char* src, size_t len);
 
 // ============================================================================
 // Error Handling
@@ -233,7 +281,7 @@ typedef enum {
 } NovaError;
 
 // ============================================================================
-// C++ Extensions (optional)
+// C++ Extensions
 // ============================================================================
 
 #ifdef __cplusplus
@@ -243,7 +291,6 @@ typedef enum {
 
 namespace nova {
 
-// RAII wrapper for arena
 class Arena {
     struct Deleter { void operator()(NovaArena* a) const { nova_arena_destroy(a); } };
     std::unique_ptr<NovaArena, Deleter> handle_;
@@ -260,12 +307,10 @@ public:
     NovaArena* get() const { return handle_.get(); }
 };
 
-// Modern tokenizer wrapper
 inline NovaTokenStream tokenize(Arena& arena, std::string_view source) {
     return nova_tokenize(arena.get(), source.data(), source.size());
 }
 
-// File loader with exception safety
 inline std::pair<char*, size_t> load_file(Arena& arena, const char* path) {
     size_t size = 0;
     char* data = nova_load_file_to_arena(arena.get(), path, &size);
@@ -273,7 +318,6 @@ inline std::pair<char*, size_t> load_file(Arena& arena, const char* path) {
     return {data, size};
 }
 
-// Debug utilities (optional - not in core API)
 namespace debug {
     const char* token_type_name(NovaTokenType t);
     void print_tokens(NovaTokenStream tokens);
