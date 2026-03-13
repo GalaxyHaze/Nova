@@ -189,6 +189,7 @@ typedef struct {
 typedef struct KalidousArena KalidousArena;
 
 KalidousTokenStream kalidous_tokenize(KalidousArena* arena, const char* source, size_t source_len);
+void kalidous_debug_tokenize(KalidousArena* arena, const char* source, size_t source_len);
 
 // ============================================================================
 // AST System
